@@ -1,0 +1,46 @@
+.cart-dropdown{
+    height: 30rem !important;
+    width: 30rem !important;
+    padding: 1rem;
+    li{
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        cursor: auto;
+        &:last-of-type{
+            margin-bottom: 2rem;
+        }
+        img{
+            height: 5rem;
+            width: 5rem;
+            margin-right: 1rem;
+        }
+        h3{
+            margin: 0;
+            font-size: 1.3rem;
+        }
+        p{
+            margin: 0;
+            font-size: 1.3rem;
+            margin-left: auto;
+            .fa-chevron-left{
+                cursor: pointer;
+            }
+            .fa-chevron-right{
+                cursor: pointer;
+            }
+        }
+    }
+    p{
+        text-align: center;
+        outline: none;
+        color: black;
+        font-size: 1.6rem;
+    }
+    button{
+        display: block;
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: 2rem;
+    }
+}

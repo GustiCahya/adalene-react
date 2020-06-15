@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+:root{
+    --color-primary: #bf5535;
+    --color-secondary: #f6f3ef;
+}
+// breakpoints
+$bp-small:22.5em; //360px
+$bp-medium:40em; //640px
+$bp-large:50em; //800px
+$bp-xlarge:118.75em; //1900px
+// underline
+@mixin underline{
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    height: .35rem;
+    width: 3rem;
+    border-radius: .1rem;
+    background-color: #fff;
+    margin-bottom: 3rem;
+}
+// website
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 62.5%;
+    @media only screen and (max-width: $bp-small){
+        font-size: 45%;
+    }
+    @media only screen and (max-width: $bp-medium){
+        font-size: 50%;
+    }
+    @media only screen and (max-width: $bp-large){
+        font-size: 55%;
+    }
+    @media only screen and (min-width: $bp-xlarge){
+        font-size: 100%;
+    }
+}
+body{
+    font-family: 'Merriweather', sans-serif;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+// button
+.adalene-effect{
+  border: 1px solid white;
+  text-transform: none;
+  box-shadow: none;
+  height: 5rem;
+  width: 20rem;
+  &:hover{
+      border: none;
+      background: white !important;
+      color: var(--color-primary);
+  }
+}
+.adalene-effect-reverse{
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  text-transform: none;
+  box-shadow: none;
+  height: 5rem;
+  width: 20rem;
+  &:hover{
+      border: none;
+      background: var(--color-primary) !important;
+      color: white;
+  }
+}

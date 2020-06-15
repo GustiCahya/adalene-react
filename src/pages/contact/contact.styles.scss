@@ -1,0 +1,96 @@
+@import 'index.scss';
+
+//Contact page
+.contact-page{
+    padding-top: 13rem;
+    min-height: 100vh;
+    h1{
+        font-family: 'Ubuntu', sans-serif;
+        letter-spacing: .3rem;
+        text-align: center;
+        margin-bottom: 5rem;
+    }
+    .contacts{
+        background: var(--color-secondary);
+        padding: 8rem 0;
+        text-align: center;
+        .customer-service{
+            margin-bottom: 8rem;
+            h2{
+                font-family: 'Ubuntu', sans-serif;
+                font-size: 2.5rem;
+                letter-spacing: .3rem;
+            }
+            .underline{
+                @include underline;
+                margin-top: 4rem;
+                margin-bottom: 8rem;
+                background-color: black;
+            }
+            .row{
+                h3{
+                    font-family: 'Marck Script';
+                    font-size: 3rem;
+                    color: var(--color-primary);
+                    letter-spacing: .1rem;
+                    margin-bottom: 1.5rem;
+                }
+                p{
+                    letter-spacing: .1rem;
+                    line-height: 2rem;
+                    font-size: 1.2rem;
+                }
+            }
+        }
+        .inquiries{
+            h2{
+                font-family: 'Marck Script';
+                font-size: 3rem;
+                color: var(--color-primary);
+                letter-spacing: .1rem;
+                margin-bottom: 1.5rem;
+            }
+            p{
+                font-size: 1.2rem;
+                letter-spacing: .1rem;
+                margin-bottom: 6.5rem;
+                line-height: 2rem;
+            }
+            form{
+                label{
+                    font-size: 1.3rem;
+                    line-height: .5rem;
+                }
+                input{
+                    border-bottom-color: var(--color-primary);
+                }
+                button{
+                    text-align: center;
+                    margin-top: 3rem;
+                    margin-bottom: 8rem;
+                }
+            }
+        }
+        .stockist{
+            h2{
+                font-family: 'Ubuntu', sans-serif;
+                font-size: 2.5rem;
+                letter-spacing: .5rem;
+            }
+            .underline{
+                @include underline;
+                background: black;
+                margin-top: 4rem;
+                margin-bottom: 8rem;
+            }
+            .row{
+                font-size: 1.2rem;
+                line-height: 2rem;
+                letter-spacing: .1rem;
+                &:not(:last-of-type){
+                    margin-bottom: 4rem;
+                }
+            }
+        }
+    }
+}

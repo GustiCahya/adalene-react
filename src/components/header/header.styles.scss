@@ -1,0 +1,94 @@
+@import 'index.scss';
+
+.nav-extended{
+    position: fixed;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.05);
+    z-index: 999;
+    transition: top .6s ease-out;
+    top: 0%;
+}
+.sidenav{
+    z-index: 1001;
+}
+.sidenav-overlay{
+    z-index: 1000;
+}
+.nav-wrapper{
+    .brand-logo{
+        font-size: 4rem;
+        font-family: 'Marck Script', sans-serif;
+        color: var(--color-primary);
+        transition: .2s ease-in-out;
+        &:hover{
+            color: black;
+        }
+        @media only screen and (max-width: $bp-medium){
+            left: auto !important;
+            transform: translateX(0) !important;
+        }
+    }
+    .nav-right{
+        .login{
+            color: var(--color-primary);
+            transition: .3s ease-in-out;
+            @media only screen and (max-width: $bp-small){
+                padding-right: 0;
+            }
+            &:hover{
+                color: black;
+            }
+        }
+        .cart{
+            font-weight: 700;
+        }
+        a{
+            font-size: 1.3rem;
+            color: var(--color-primary);
+            &:hover{
+                background: transparent;
+            }
+        }
+    }
+    .nav-left{
+        a{
+            width: 3rem;
+            transition: .2s;
+        }
+        a > svg{
+            font-size: 1.7rem;
+        }
+        a:hover{
+            background: transparent;
+            color: var(--color-primary);
+        }
+        @media only screen and (max-width: $bp-medium){
+            display: none;
+        }
+    }
+    a{
+        color: black;
+    }
+}
+.nav-content{
+    width: 60%;
+    transition: .8s ease-out;
+    .tabs{
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+        a{
+            font-weight: 300;
+            text-transform: capitalize;
+            color: black !important;
+            &:hover{
+                color: var(--color-primary) !important;
+            }
+            &:focus{
+                background: transparent;
+            }
+        }
+        .active a{
+            color: var(--color-primary) !important;
+        }
+    }
+}
