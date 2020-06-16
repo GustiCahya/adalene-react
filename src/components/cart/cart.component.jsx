@@ -7,14 +7,6 @@ import { selectCartItems } from '../../redux/cart/cart.selectors';
 import { decreaseItemInCart, increaseItemInCart } from '../../redux/cart/cart.actions';
 
 class Cart extends Component{
-    getSumPriceItems = () => {
-        const { cartItems } = this.props;
-        return cartItems.reduce((accumulation, currentValue) => accumulation + currentValue.totalPrice ,0)
-    }
-    getSumTotalItems = () => {
-        const { cartItems } = this.props;
-        return cartItems.reduce((accumulation, currentValue) => accumulation + currentValue.total ,0)
-    }
     handleDecreaseItem = (event, id) => {
         event.preventDefault();
         const { decreaseItem } = this.props;
@@ -62,6 +54,14 @@ class Cart extends Component{
                 </ul>
             </li>
         )
+    }
+    getSumPriceItems = () => {
+        const { cartItems } = this.props;
+        return cartItems.reduce((accumulation, currentValue) => accumulation + currentValue.totalPrice ,0)
+    }
+    getSumTotalItems = () => {
+        const { cartItems } = this.props;
+        return cartItems.reduce((accumulation, currentValue) => accumulation + currentValue.total ,0)
     }
     componentDidMount(){
         M.Dropdown.init($('.dropdown-trigger'), {
