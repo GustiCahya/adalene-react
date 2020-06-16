@@ -3,9 +3,22 @@ import $ from 'utils/selector';
 import M from 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import './shop.styles.scss';
+import { fetchAllItemsShop } from '../../firebase/firebase.utils';
+import Loading from '../../components/loading/loading.component';
+import { connect } from 'react-redux';
+import { addItemToCart } from '../../redux/cart/cart.actions';
 
 class Shop extends Component{
+    state = {
+        items: []
+    }
+    handleAddItem = (event, item) => {
+        event.preventDefault();
+        const {addItemToCart} = this.props;
+        addItemToCart(item);
+    }
     render(){
+        const {items} = this.state;
         return(
             <main>
                 <div className="shop-page">
@@ -67,19 +80,31 @@ class Shop extends Component{
                             </ul>
                         </div>
                         <div className="items col s12 m9">
-                            <a href="/" className="item">
-                                <div className="item__image">
-                                    <div className="item__image--badge">
-                                        Best Seller
-                                    </div>
-                                    <img loading="lazy" src="https://dummyimage.com/200x200/000/fff" alt="product" />
-                                    <div className="item__image--label">
-                                        Add to Cart
-                                    </div>
-                                </div>
-                                <p className="item__title">I'm a product</p>
-                                <p className="item__price">$250.00</p>
-                            </a>
+                            {
+                                (items.length > 0)
+                                ? items.map((item, index) => (
+                                        <a 
+                                            key={item.id} 
+                                            onClick={(event) => this.handleAddItem(event, item)} 
+                                            href="/" 
+                                            className="item">
+                                            <div className="item__image">
+                                                <div 
+                                                    className="item__image--badge" 
+                                                    style={(index < 5) ? {} : {display: 'none'}}>
+                                                    Best Seller
+                                                </div>
+                                                <img loading="lazy" src={item.image} alt="product" />
+                                                <div className="item__image--label">
+                                                    Add to Cart
+                                                </div>
+                                            </div>
+                                            <p className="item__title">{item.name}</p>
+                                            <p className="item__price">${item.price}</p>
+                                        </a>
+                                    ))
+                                : <Loading />
+                            }
                         </div>
                     </div>
                 </div>
@@ -88,7 +113,12 @@ class Shop extends Component{
     }
     componentDidMount(){
         M.Collapsible.init($('.collapsible'));
+        fetchAllItemsShop().then(items => this.setState({items: items}));
     }
 }
 
-export default Shop;
+const mapDispatchToProps = (dispatch) => ({
+    addItemToCart: (item) => dispatch(addItemToCart(item))
+})
+
+export default connect(null, mapDispatchToProps)(Shop);

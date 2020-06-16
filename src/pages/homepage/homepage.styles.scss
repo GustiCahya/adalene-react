@@ -45,6 +45,10 @@
         margin-bottom: 5rem;
     }
     &__items{
+        position: relative;
+        .swiper-slide{
+            width: max-content !important;
+        }
         .best-item{
             &__image{
                 position: relative;
@@ -52,6 +56,10 @@
                 margin-bottom: 1rem;
                 overflow: hidden;
                 cursor: pointer;
+                img{
+                    height: 20rem;
+                    width: 20rem;
+                }
                 &--badge{
                     position: absolute;
                     min-width: 40%;
@@ -91,29 +99,6 @@
                 font-size: 1.6rem;
                 color: var(--color-primary);
             }
-        }
-        .fa-chevron-left{
-            position: absolute;
-            top: 45%;
-            left: 1rem;
-            transform: translateY(-50%);
-            color: white;
-            z-index: 1;
-            text-shadow: 0 0 .2rem rgb(0,0,0);
-            cursor: pointer;
-            font-size: 2rem;
-
-        }
-        .fa-chevron-right{
-            position: absolute;
-            top: 45%;
-            right: 1rem;
-            transform: translateY(-50%);
-            color: white;
-            z-index: 1;
-            text-shadow: 0 0 .2rem rgb(0,0,0);
-            cursor: pointer;
-            font-size: 2rem;
         }
     }
     button{

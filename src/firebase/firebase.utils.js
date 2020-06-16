@@ -15,6 +15,14 @@ const config = {
 }
 firebase.initializeApp(config);
 
+export const fetchAllItemsShop = async () => {
+    const shopRef = firestore.collection(`shop`);
+    const snapshot = await shopRef.get();
+    const items = [];
+    snapshot.forEach(doc => items.push({id: doc.id, ...doc.data()}));
+    return items;
+} 
+
 export const createUserProfileDocument = async (userAuth, additionalData) => {
     if (!userAuth) return;
 
