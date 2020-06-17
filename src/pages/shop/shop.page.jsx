@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
-import $ from 'utils/selector';
-import M from 'materialize-css';
+import { connect } from 'react-redux';
+
 import 'materialize-css/dist/css/materialize.min.css';
 import './shop.styles.scss';
-import { fetchAllItemsShop } from '../../firebase/firebase.utils';
-import Loading from '../../components/loading/loading.component';
-import { connect } from 'react-redux';
-import { addItemToCart } from '../../redux/cart/cart.actions';
+
+import $ from 'utils/selector';
+import M from 'materialize-css';
+
+import Loading from 'components/loading/loading.component';
+
+import { fetchAllItemsShop } from 'firebase/firebase.utils';
+import { addItemToCart } from 'redux/cart/cart.actions';
+import { selectCurrentUser } from 'redux/user/user.selectors'
 
 class Shop extends Component{
     state = {
@@ -14,8 +19,12 @@ class Shop extends Component{
     }
     handleAddItem = (event, item) => {
         event.preventDefault();
-        const {addItemToCart} = this.props;
-        addItemToCart(item);
+        const {addItemToCart, currentUser} = this.props;
+        if(currentUser){
+            addItemToCart(item)
+        }else{
+            M.toast({html: "Please Login First"})
+        }
     }
     render(){
         const {items} = this.state;
@@ -117,8 +126,12 @@ class Shop extends Component{
     }
 }
 
+const mapStateToProps = (state) => ({
+    currentUser: selectCurrentUser(state)
+})
+
 const mapDispatchToProps = (dispatch) => ({
     addItemToCart: (item) => dispatch(addItemToCart(item))
 })
 
-export default connect(null, mapDispatchToProps)(Shop);
+export default connect(mapStateToProps, mapDispatchToProps)(Shop);

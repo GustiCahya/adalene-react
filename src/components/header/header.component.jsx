@@ -30,14 +30,16 @@ class Header extends Component {
                         <ul className="nav-right right">
                             {
                                 (currentUser) 
-                                ? <li><a href="/" onClick={(event) => {
+                                ? (<>
+                                    <li><a href="/" onClick={(event) => {
                                         event.preventDefault();
                                         M.toast({html: 'Account has been logged out!', classes:'red darken-4'});
                                         auth.signOut();
                                     }} className="login">Log out</a></li>
+                                    <Cart /> 
+                                    </>)
                                 : <Login currentUser={currentUser} /> 
                             }
-                            <Cart />
                         </ul>
                     </div>
                     <div className="nav-content container hide-on-med-and-down">

@@ -1,5 +1,9 @@
 @import 'index.scss';
 
+body{
+    overflow-y: scroll !important;
+}
+
 .login_modal{
     text-align: center;
     width: 50rem;

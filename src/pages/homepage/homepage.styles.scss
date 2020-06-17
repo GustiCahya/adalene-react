@@ -75,7 +75,7 @@
                 }
                 &--label{
                     text-align: center;
-                    background: white;
+                    background: var(--color-secondary);
                     position: absolute;
                     padding: 1rem 0;
                     font-weight: 400;
@@ -116,13 +116,13 @@
         background: var(--color-secondary);
         position: relative;
         text-align: center;
-        cursor:pointer;
         .product-wrapper{
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             transition: .3s ease-out;
+            cursor: pointer;
             .title{
                 transition: inherit;
                 font-size: 1.3rem;
@@ -170,13 +170,13 @@
         background: var(--color-secondary);
         position: relative;
         text-align: center;
-        cursor:pointer;
         .product-wrapper{
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             transition: .6s ease-out;
+            cursor:pointer;
             img{
                 transition: inherit;
                 margin-bottom: 4rem;

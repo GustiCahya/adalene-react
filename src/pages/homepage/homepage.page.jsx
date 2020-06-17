@@ -8,9 +8,12 @@ import Swiper from 'swiper';
 import 'materialize-css/dist/css/materialize.min.css';
 import './homepage.styles.scss'
 import navbarIntersecting from 'utils/navbarIntersecting';
-import { fetchAllItemsShop } from '../../firebase/firebase.utils';
-import Loading from '../../components/loading/loading.component';
+import { fetchAllItemsShop } from 'firebase/firebase.utils';
+import Loading from 'components/loading/loading.component';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { addItemToCart } from 'redux/cart/cart.actions';
+import { selectCurrentUser } from 'redux/user/user.selectors';
 
 
 class Homepage extends Component {
@@ -19,13 +22,16 @@ class Homepage extends Component {
     }
     render(){
         const {items} = this.state;
-        const {history} = this.props;
+        const {history, addItemToCart, currentUser} = this.props;
         return(
             <main>
                 <section className="hero">
                     <div className="hero__content">
                         <h1>CUE THE COLOR</h1>
-                        <button className="btn waves-effect waves-orange transparent adalene-effect">Shop the collection</button>
+                        <button onClick={() => history.push('shop')}
+                            className="btn waves-effect waves-orange transparent adalene-effect">
+                                Shop the collection
+                        </button>
                     </div>
                 </section>
                 <section className="best-sellers container">
@@ -38,7 +44,8 @@ class Homepage extends Component {
                                 ? items
                                     .filter((_,index)=>index<5)
                                     .map((item) => (
-                                    <div key={item.id} onClick={(event) => event.preventDefault()} 
+                                    <div key={item.id} 
+                                    onClick={(currentUser) ? () => addItemToCart(item) : () => M.toast({html: 'Please Login First'})} 
                                     className="best-item swiper-slide">
                                         <div className="best-item__image">
                                             <div className="best-item__image--badge">
@@ -69,7 +76,9 @@ class Homepage extends Component {
                                 items
                                 .filter(item => item.id === "6cuv22DJjx8BXXS0I3Ct")
                                 .map(item => (
-                                    <div key={item.id} className="product-wrapper">
+                                    <div key={item.id} 
+                                    onClick={(currentUser) ? () => addItemToCart(item) : () => M.toast({html: 'Please Login First'})} 
+                                    className="product-wrapper">
                                         <img loading="lazy" alt="purse" src={item.image} width="300"/>
                                         <p className="title">{item.name}</p>
                                         <p className="price">${item.price}</p>
@@ -93,7 +102,9 @@ class Homepage extends Component {
                                 items
                                 .filter(item => item.id === "Z3eI5rqZrUoziva02IQX")
                                 .map(item => (
-                                    <div key={item.id} className="product-wrapper">
+                                    <div key={item.id} 
+                                    onClick={(currentUser) ? () => addItemToCart(item) : () => M.toast({html: 'Please Login First'})} 
+                                    className="product-wrapper">
                                         <img loading="lazy" alt="belt" src={item.image} width="300"/>
                                         <p className="title">{item.name}</p>
                                         <p className="price">${item.price}</p>
@@ -181,7 +192,7 @@ class Homepage extends Component {
     }
     componentDidMount(){
         M.Parallax.init($('.parallax'));
-        navbarIntersecting.observe($('.best-sellers'));
+        navbarIntersecting.observe($('.about'));
         fetchAllItemsShop().then(items => this.setState({items: items}));
         new Swiper('.best-sellers__items', {
             speed: 400,
@@ -224,4 +235,13 @@ class Homepage extends Component {
         })
     }
 }
-export default withRouter(Homepage);
+
+const mapStateToProps = (state) => ({
+    currentUser: selectCurrentUser(state)
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    addItemToCart: (item) => dispatch(addItemToCart(item))
+})
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Homepage));

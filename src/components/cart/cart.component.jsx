@@ -5,6 +5,7 @@ import './cart.styles.scss'
 import { connect } from 'react-redux';
 import { selectCartItems } from '../../redux/cart/cart.selectors';
 import { decreaseItemInCart, increaseItemInCart } from '../../redux/cart/cart.actions';
+import StripeCheckoutButton from '../stripe-button/stripe-button.component';
 
 class Cart extends Component{
     handleDecreaseItem = (event, id) => {
@@ -21,7 +22,13 @@ class Cart extends Component{
         const { cartItems } = this.props;
         return (
             <li>
-                <a href="/" data-target="cart-dropdown" className="cart dropdown-trigger">Cart ({this.getSumTotalItems()})</a>
+                <a 
+                    href="/" 
+                    data-target="cart-dropdown" 
+                    className="cart dropdown-trigger"
+                >
+                    Cart ({this.getSumTotalItems()})
+                </a>
                 <ul id="cart-dropdown" className="cart-dropdown dropdown-content">
                     {
                         (cartItems.length > 0) 
@@ -50,18 +57,18 @@ class Cart extends Component{
                         : <li className="cart-empty"><span>Cart is empty</span></li>
                     }
                     <p>Total: {this.getSumTotalItems()} | Price: {this.getSumPriceItems()}$</p>
-                    <button className="btn blue">Buy</button>
+                    <StripeCheckoutButton price={this.getSumPriceItems()} className="button-pay"/>
                 </ul>
             </li>
         )
     }
     getSumPriceItems = () => {
         const { cartItems } = this.props;
-        return cartItems.reduce((accumulation, currentValue) => accumulation + currentValue.totalPrice ,0)
+        return cartItems.reduce((accumulation, currentValue) => accumulation + Number(currentValue.totalPrice) ,0);
     }
     getSumTotalItems = () => {
         const { cartItems } = this.props;
-        return cartItems.reduce((accumulation, currentValue) => accumulation + currentValue.total ,0)
+        return cartItems.reduce((accumulation, currentValue) => accumulation + Number(currentValue.total) ,0);
     }
     componentDidMount(){
         M.Dropdown.init($('.dropdown-trigger'), {
